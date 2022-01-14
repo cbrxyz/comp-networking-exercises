@@ -20,7 +20,19 @@ while True:
     print("Attempting to retrieve {}...".format(file_name))
 
     try:
-        # TODO
+        # Attempt to retrieve the file and send it to the user
+        file = open(file_name)
+        content = file.read()
+
+        # Send the HTTP header
+        connection_socket.send("HTTP/1.1 200 OK\n\n".encode())
+        
+        # Send the file contents line by line
+        connection_socket.send(content.encode())
+
+        # End HTTP response
+        connection_socket.send("\r\n".encode())
+
         pass
 
     except IOError:
